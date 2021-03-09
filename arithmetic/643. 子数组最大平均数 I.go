@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println(findMaxAverage([]int{1,12,-5,-6,50,3}, 4))
+	fmt.Println(findMaxAverage([]int{1, 12, -5, -6, 50, 3}, 4))
 }
 func findMaxAverage1(nums []int, k int) float64 {
 
@@ -17,15 +17,14 @@ func findMaxAverage1(nums []int, k int) float64 {
 		if i >= k {
 			curSum -= nums[i-k]
 		}
-		if (i+1)>=k {
+		if (i + 1) >= k {
 			if curSum > maxSum {
 				maxSum = curSum
 			}
 		}
 	}
-return float64(maxSum) / float64(k)
+	return float64(maxSum) / float64(k)
 }
-
 
 func findMaxAverage(nums []int, k int) float64 {
 	sum := 0

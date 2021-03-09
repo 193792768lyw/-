@@ -13,7 +13,7 @@ func main() {
 	for _, va := range []string{"kk", "pp"} {
 		groupMap1[va] = a[va]
 	}
-	vv, _  :=  json.Marshal(groupMap1)
+	vv, _ := json.Marshal(groupMap1)
 	fmt.Println(string(vv))
 	//v := a["kk"].(int)
 	//fmt.Println(a["kk1"] == nil)

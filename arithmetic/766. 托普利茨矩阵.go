@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	
+
 }
 func isToeplitzMatrix(matrix [][]int) bool {
 	n, m := len(matrix), len(matrix[0])

@@ -28,7 +28,7 @@ func main() {
 //}
 
 func subarraysWithKDistinct(A []int, K int) (ans int) {
-	return atMostK(A,K) - atMostK(A,K-1)
+	return atMostK(A, K) - atMostK(A, K-1)
 }
 
 func atMostK(A []int, K int) int {
@@ -51,10 +51,9 @@ func atMostK(A []int, K int) int {
 			left += 1
 		}
 
-		res += right-left+1
+		res += right - left + 1
 		right += 1
 	}
 
 	return res
 }
-

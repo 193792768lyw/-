@@ -23,14 +23,13 @@ func maxSatisfied(customers []int, grumpy []int, X int) int {
 			if grumpy[left] == 1 {
 				temp -= customers[left]
 			}
-			left ++
+			left++
 		}
 		if temp > r {
 			r = temp
 		}
-		right ++
+		right++
 	}
 
-return r + res
+	return r + res
 }
-

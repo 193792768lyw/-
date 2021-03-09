@@ -2,7 +2,6 @@ package main
 
 func main() {
 
-
 }
 
 func fairCandySwap(a, b []int) []int {

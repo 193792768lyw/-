@@ -1,9 +1,8 @@
 package main
 
 func main() {
-	
-}
 
+}
 
 type pair struct{ x, y int }
 

@@ -9,7 +9,7 @@ func main() {
 	//将中间的一个'A'替换为'B',字符串变为 "AABBBBA"。
 	//子串 "BBBB" 有最长重复字母, 答案为 4。
 
-fmt.Println(characterReplacement("AABBBCC",0))
+	fmt.Println(characterReplacement("AABBBCC", 0))
 }
 func characterReplacement(s string, k int) int {
 	cnt := [26]int{}
@@ -31,4 +31,3 @@ func max(a, b int) int {
 	}
 	return b
 }
-

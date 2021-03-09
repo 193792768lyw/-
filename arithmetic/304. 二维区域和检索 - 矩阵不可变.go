@@ -40,7 +40,7 @@ func (this *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
 	for i := row1; i <= row2; i++ {
 		if col1 == 0 {
 			sum += this.preMatrix[i][col2]
-		}else{
+		} else {
 			sum += this.preMatrix[i][col2] - this.preMatrix[i][col1-1]
 
 		}

@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
- fmt.Println(minCut("aab"))
+	fmt.Println(minCut("aab"))
 }
 func minCut(s string) int {
 	l := len(s)

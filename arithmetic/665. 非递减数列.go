@@ -24,7 +24,6 @@ func checkPossibility(nums []int) bool {
 	return count <= 1
 }
 
-
 func checkPossibility(nums []int) bool {
 	for i := 0; i < len(nums)-1; i++ {
 		x, y := nums[i], nums[i+1]
@@ -57,8 +56,9 @@ func checkPossibility(nums []int) bool {
 	}
 	return true
 }
- /*
+
+/*
  例①： 4, 2, 5
  例②： 1, 4, 2, 5
  例③： 3, 4, 2, 5
-  */
+*/

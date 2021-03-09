@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(maxTurbulenceSize([]int{9,4,2,10,7,8,8,1,9}))
+	fmt.Println(maxTurbulenceSize([]int{9, 4, 2, 10, 7, 8, 8, 1, 9}))
 }
 func maxTurbulenceSize(arr []int) int {
 	n := len(arr)
@@ -35,4 +35,3 @@ func max(a, b int) int {
 	}
 	return b
 }
-

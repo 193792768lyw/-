@@ -37,7 +37,7 @@ func findShortestSubArray(nums []int) int {
 	for _, value := range info {
 		if value.Nums == du {
 			if value.Max-value.Min+1 < res {
-				res = value.Max - value.Min+1
+				res = value.Max - value.Min + 1
 			}
 		}
 	}

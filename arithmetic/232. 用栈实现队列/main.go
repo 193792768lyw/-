@@ -17,7 +17,7 @@ func main() {
 
 每次 \texttt{pop}pop 或 \texttt{peek}peek 时，若输出栈为空则将输入栈的全部数据依次弹出并压入输出栈，这样输出栈从栈顶往栈底的顺序就是队列从队首往队尾的顺序。
 
- */
+*/
 
 type MyQueue struct {
 	inStack, outStack []int
@@ -57,7 +57,6 @@ func (q *MyQueue) Peek() int {
 func (q *MyQueue) Empty() bool {
 	return len(q.inStack) == 0 && len(q.outStack) == 0
 }
-
 
 //type MyQueue struct {
 //	arr []int

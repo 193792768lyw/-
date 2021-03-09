@@ -13,7 +13,6 @@ func main() {
 	v.AddNum(12)
 	fmt.Println(v.FindMedian())
 
-
 }
 
 func BinarySearch(arr []int, target int) int {

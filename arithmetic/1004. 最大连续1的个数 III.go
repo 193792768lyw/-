@@ -2,7 +2,7 @@ package main
 
 func main() {
 	temp := map[string]interface{}{}
-	  delete(temp,"kkk")
+	delete(temp, "kkk")
 
 	//fmt.Println(longestOnes([]int{1,1,1,0,0,0,1,1,1,1,0}, 2))
 }

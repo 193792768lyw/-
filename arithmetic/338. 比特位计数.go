@@ -13,7 +13,7 @@ func test_recover() {
 		fmt.Println("defer func")
 		switch recover().(type) {
 		case string:
-			fmt.Println("recover success",recover())
+			fmt.Println("recover success", recover())
 		}
 
 	}()
@@ -35,6 +35,7 @@ func countBits(num int) []int {
 
 	return res
 }
+
 //
 //对于所有的数字，只有两类：
 //奇数：二进制表示中，奇数一定比前面那个偶数多一个 1，因为多的就是最低位的 1。
@@ -46,12 +47,11 @@ func countBits(num int) []int {
 //2 = 10       4 = 100       8 = 1000
 //3 = 11       6 = 110       12 = 1100
 
-
 func countBits1(num int) []int {
 	result := make([]int, num+1)
 	result[0] = 0
 	for i := 1; i <= num; i++ {
-		if i % 2 == 1{
+		if i%2 == 1 {
 			result[i] = result[i-1] + 1
 		} else {
 			result[i] = result[i/2]
