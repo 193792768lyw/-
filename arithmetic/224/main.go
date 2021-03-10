@@ -7,7 +7,38 @@ import (
 func main() {
 	fmt.Println(calculate(
 
-		"(1)"))
+		"(+1)+(-1)"))
+}
+
+func calculate1(s string) (ans int) {
+	ops := []int{1}
+	sign := 1
+	n := len(s)
+	for i := 0; i < n; {
+		switch s[i] {
+		case ' ':
+			i++
+		case '+':
+			sign = ops[len(ops)-1]
+			i++
+		case '-':
+			sign = -ops[len(ops)-1]
+			i++
+		case '(':
+			ops = append(ops, sign)
+			i++
+		case ')':
+			ops = ops[:len(ops)-1]
+			i++
+		default:
+			num := 0
+			for ; i < n && '0' <= s[i] && s[i] <= '9'; i++ {
+				num = num*10 + int(s[i]-'0')
+			}
+			ans += sign * num
+		}
+	}
+	return
 }
 
 /*
@@ -54,6 +85,9 @@ func calculate(s string) int {
 			continue
 		} else if value == '(' { // 如果是 ( : 直接加入 ops 中，等待与之匹配的 )
 			ops = append(ops, value)
+			if s[i+1] == '-' || s[i+1] == '+' {
+				nums = append(nums, 0)
+			}
 		} else if value == ')' { // 如果是 ) : 使用现有的 nums 和 ops 进行计算，直到遇到左边最近的一个左括号为止，计算结果放到 nums
 			// 计算到最近一个左括号为止
 			for i := len(ops) - 1; i >= 0; i-- {
