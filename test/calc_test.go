@@ -80,10 +80,9 @@ import (
 //	createMulTestCase(t, &calcCase{"three", 2, 0, 0}) // wrong case
 //}
 
-
 /*
 准备(setup)和回收(teardown)
- */
+*/
 
 func setup() {
 	fmt.Println("Before all tests")
@@ -110,7 +109,7 @@ func TestMain(m *testing.M) {
 }
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.RemoteAddr,r.URL)
+	fmt.Println(r.RemoteAddr, r.URL)
 	w.Write([]byte("hello world"))
 }
 
@@ -152,13 +151,12 @@ func TestConn1(t *testing.T) {
 	}
 }
 
-
 func BenchmarkHello(b *testing.B) {
 	//for i := 0; i < b.N; i++ {
 	//	fmt.Sprintf("hello")
 	//}
 	v := 0.099
-	fmt.Println(v*100)
+	fmt.Println(v * 100)
 	fmt.Println(fmt.Sprintf("%.2f", v*100))
 }
 
@@ -173,10 +171,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func TestAdd(t *testing.T) {
-	dd := strings.Split("/a/b","/")
+	dd := strings.Split("/a/b", "/")
 	fmt.Println(dd)
 }
-
 
 func TestMainn(t *testing.T) {
 	si := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
