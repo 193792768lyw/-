@@ -5,6 +5,11 @@ import (
 	"net"
 )
 
+/*
+在第一次看到这个UDP 服务器的编程模型的时候， 我就好奇这怎么支持并发，
+从代码里我们可以看到 服务器只有一个socket。所有的客户端都是通过同一个socket进行通信。
+对于TCP 服务器来说，有一个新的客户端连接的时候，会产生一个新的socket用于和新客户端通信。
+*/
 func main() {
 	// 建立 udp 服务器
 	listen, err := net.ListenUDP("udp", &net.UDPAddr{
