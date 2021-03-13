@@ -51,3 +51,6 @@ func main() {
 		go process(conn)
 	}
 }
+
+// 上面的模式特别像bio模式，每个连接起一个协程，但是其实不然，
+//go 的runtime对底层的io模型 进行了封装，简化了复杂性
