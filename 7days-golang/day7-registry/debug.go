@@ -32,6 +32,14 @@ const debugText = `<html>
 
 var debug = template.Must(template.New("RPC debug").Parse(debugText))
 
+/*
+支持 HTTP 协议的好处在于，RPC 服务仅仅使用了监听端口的 /_geerpc 路径，
+在其他路径上我们可以提供诸如日志、统计等更为丰富的功能。
+接下来我们在 /debug/geerpc 上展示服务的调用统计视图。
+在这里，我们将返回一个 HTML 报文，这个报文将展示注册所有的 service 的每一个方法的调用情况。
+
+
+*/
 type debugHTTP struct {
 	*Server
 }

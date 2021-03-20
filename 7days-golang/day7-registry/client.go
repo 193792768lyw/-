@@ -353,6 +353,7 @@ func XDial(rpcAddr string, opts ...*Option) (*Client, error) {
 		return DialHTTP("tcp", addr, opts...)
 	default:
 		// tcp, unix or other transport protocol
+		fmt.Println(protocol, "------", addr)
 		return Dial(protocol, addr, opts...)
 	}
 }

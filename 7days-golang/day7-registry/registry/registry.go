@@ -1,6 +1,7 @@
 package registry
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"sort"
@@ -12,6 +13,9 @@ import (
 // GeeRegistry is a simple register center, provide following functions.
 // add a server and receive heartbeat to keep it alive.
 // returns all alive servers and delete dead servers sync simultaneously.
+/*
+首先定义 GeeRegistry 结构体，默认超时时间设置为 5 min，也就是说，任何注册的服务超过 5 min，即视为不可用状态。
+*/
 type GeeRegistry struct {
 	timeout time.Duration
 	mu      sync.Mutex // protect following
@@ -38,6 +42,7 @@ func New(timeout time.Duration) *GeeRegistry {
 
 var DefaultGeeRegister = New(defaultTimeout)
 
+// 添加服务实例，如果服务已经存在，则更新 start。
 func (r *GeeRegistry) putServer(addr string) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
@@ -47,8 +52,10 @@ func (r *GeeRegistry) putServer(addr string) {
 	} else {
 		s.start = time.Now() // if exists, update start time to keep alive
 	}
+	fmt.Println(r.servers)
 }
 
+// 返回可用的服务列表，如果存在超时的服务，则删除。
 func (r *GeeRegistry) aliveServers() []string {
 	r.mu.Lock()
 	defer r.mu.Unlock()
@@ -64,6 +71,12 @@ func (r *GeeRegistry) aliveServers() []string {
 	return alive
 }
 
+/*
+为了实现上的简单，GeeRegistry 采用 HTTP 协议提供服务，且所有的有用信息都承载在 HTTP Header 中。
+
+Get：返回所有可用的服务列表，通过自定义字段 X-Geerpc-Servers 承载。
+Post：添加服务实例或发送心跳，通过自定义字段 X-Geerpc-Server 承载。
+*/
 // Runs at /_geerpc_/registry
 func (r *GeeRegistry) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	switch req.Method {
@@ -93,6 +106,7 @@ func HandleHTTP() {
 	DefaultGeeRegister.HandleHTTP(defaultPath)
 }
 
+// Heartbeat 方法，便于服务启动时定时向注册中心发送心跳，默认周期比注册中心设置的过期时间少 1 min。
 // Heartbeat send a heartbeat message every once in a while
 // it's a helper function for a server to register or send heartbeat
 func Heartbeat(registry, addr string, duration time.Duration) {

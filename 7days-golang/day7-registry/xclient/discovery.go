@@ -8,6 +8,12 @@ import (
 	"time"
 )
 
+/*
+服务发现
+
+SelectMode 代表不同的负载均衡策略，简单起见，GeeRPC 仅实现 Random 和 RoundRobin 两种策略。
+*/
+
 type SelectMode int
 
 const (
@@ -15,6 +21,13 @@ const (
 	RoundRobinSelect                   // select using Robbin algorithm
 )
 
+/*
+Discovery 是一个接口类型，包含了服务发现所需要的最基本的接口。
+Refresh() 从注册中心更新服务列表
+Update(servers []string) 手动更新服务列表
+Get(mode SelectMode) 根据负载均衡策略，选择一个服务实例
+GetAll() 返回所有的服务实例
+*/
 type Discovery interface {
 	Refresh() error // refresh from remote registry
 	Update(servers []string) error
@@ -26,6 +39,8 @@ var _ Discovery = (*MultiServersDiscovery)(nil)
 
 // MultiServersDiscovery is a discovery for multi servers without a registry center
 // user provides the server addresses explicitly instead
+// r 是一个产生随机数的实例，初始化时使用时间戳设定随机数种子，避免每次产生相同的随机数序列。
+// index 记录 Round Robin 算法已经轮询到的位置，为了避免每次从 0 开始，初始化时随机设定一个值。
 type MultiServersDiscovery struct {
 	r       *rand.Rand   // generate random number
 	mu      sync.RWMutex // protect following
