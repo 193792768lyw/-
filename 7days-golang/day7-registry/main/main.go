@@ -16,6 +16,9 @@ type Foo int
 
 type Args struct{ Num1, Num2 int }
 
+/*
+首先，启动 RPC 服务的代码还是类似的，Sum 是正常的方法，Sleep 用于验证 XClient 的超时机制能否正常运作。
+*/
 func (f Foo) Sum(args Args, reply *int) error {
 	*reply = args.Num1 + args.Num2
 	return nil
@@ -27,6 +30,7 @@ func (f Foo) Sleep(args Args, reply *int) error {
 	return nil
 }
 
+// 启动注册中心，用于保存可用的服务列表
 func startRegistry(wg *sync.WaitGroup) {
 	l, _ := net.Listen("tcp", ":9999")
 	registry.HandleHTTP()
@@ -39,11 +43,13 @@ func startServer(registryAddr string, wg *sync.WaitGroup) {
 	l, _ := net.Listen("tcp", ":0")
 	server := geerpc.NewServer()
 	_ = server.Register(&foo)
+	// 添加调用注册中心的 Heartbeat 方法的逻辑，定期向注册中心发送心跳保活。
 	registry.Heartbeat(registryAddr, "tcp@"+l.Addr().String(), 0)
 	wg.Done()
 	server.Accept(l)
 }
 
+// 封装一个方法 foo，便于在 Call 或 Broadcast 之后统一打印成功或失败的日志。
 func foo(xc *xclient.XClient, ctx context.Context, typ, serviceMethod string, args *Args) {
 	var reply int
 	var err error
@@ -98,6 +104,7 @@ func main() {
 	log.SetFlags(0)
 	registryAddr := "http://localhost:9999/_geerpc_/registry"
 	var wg sync.WaitGroup
+	// 确保注册中心启动后，再启动 RPC 服务端，最后客户端远程调用。
 	wg.Add(1)
 	go startRegistry(&wg)
 	wg.Wait()
