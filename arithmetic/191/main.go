@@ -1,9 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
-	fmt.Println(hammingWeight(0b00000000000000000000000000001011))
+	fmt.Println(strconv.ParseInt("99", 10, 64))
+	if "-5" < "0" {
+		fmt.Println("vdibfhn")
+	}
+	//fmt.Println(hammingWeight(0b00000000000000000000000000001011))
+}
+
+func IsNum(s string) bool {
+	_, err := strconv.ParseFloat(s, 64)
+	return err == nil
 }
 func hammingWeight1(num uint32) int {
 	sum := 0
