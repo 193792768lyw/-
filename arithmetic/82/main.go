@@ -1,7 +1,13 @@
 package main
 
-func main() {
+import (
+	"fmt"
+	"github.com/tidwall/gjson"
+)
 
+func main() {
+	r := gjson.Parse("{\"level\":\"142\",\"honour\":\"33\",\"nickname\":\"狗子～你醒...\"}")
+	fmt.Println(r.Get("nickname").Value().(string))
 }
 
 /**输入: 1->2->3->3->4->4->5
