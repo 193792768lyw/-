@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net"
+	"time"
 )
 
 func main() {
@@ -16,6 +17,7 @@ func main() {
 	}
 	defer listen.Close()
 	for {
+		time.Sleep(3 * time.Second)
 		// 发送数据
 		sendData := []byte("Hello server")
 		_, err = listen.Write(sendData) // 发送数据

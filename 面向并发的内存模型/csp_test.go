@@ -16,7 +16,7 @@ func TestOther(t *testing.T) {
 	go worker(&wg)
 	wg.Wait()
 
-	fmt.Println(total )
+	fmt.Println(total)
 
 }
 
@@ -48,9 +48,7 @@ func worker(wg *sync.WaitGroup) {
 //}
 ////15150
 
-
-
-type singleton struct {}
+type singleton struct{}
 
 var (
 	instance    *singleton
