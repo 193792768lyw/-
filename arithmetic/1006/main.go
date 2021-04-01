@@ -3,7 +3,16 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(clumsy(4))
+	arr := make([]int, 3, 9)
+	_ = append(arr, 4)
+	fmt.Println(arr)
+
+	//fmt.Println(clumsy(4))
+	//for i := 0 ; i < 10 ; i++ {
+	//	go func() {
+	//		fmt.Println(i)
+	//	}()
+	//}
 }
 
 /*
