@@ -16,12 +16,8 @@ func numRabbits(answers []int) int {
 	}
 	res := 0
 	for k, v := range mapAn {
-		if v > k+1 {
-			n := int(math.Ceil(float64(v) / float64(k+1)))
-			res += n * (k + 1)
-		} else {
-			res += k + 1
-		}
+		n := int(math.Ceil(float64(v) / float64(k+1)))
+		res += n * (k + 1)
 	}
 
 	return res
