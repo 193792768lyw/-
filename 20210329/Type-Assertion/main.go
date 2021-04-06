@@ -1,5 +1,10 @@
 package main
 
+import (
+	"encoding/csv"
+	"os"
+)
+
 //
 //func main() {
 //	var i interface{} = 10
@@ -13,5 +18,21 @@ package main
 //}
 
 func main() {
+	f, err := os.Create("test.csv")
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
 
+	f.WriteString("\xEF\xBB\xBF")
+
+	w := csv.NewWriter(f)
+	data := [][]string{
+		{"1", "test1", "test1-3"},
+		{"2", "test2", "test2-1"},
+		{"3", "test3", "test3-1"},
+		{"3", "test3", "刘耀武"},
+	}
+
+	w.WriteAll(data)
 }
