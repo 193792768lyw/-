@@ -1,15 +1,13 @@
 package main
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/Jeffail/tunny"
-	"io"
-	"io/ioutil"
 	"log"
 	"math"
 	"os"
+	"strconv"
 	"sync"
 	"testing"
 	"time"
@@ -110,15 +108,51 @@ func TestOne5(t *testing.T) {
 	fmt.Println(studentPool.Get())
 }
 
-func TestOne6(t *testing.T) {
-	content, _ := ioutil.ReadFile("test.jpeg")
-	//	_ = ioutil.WriteFile("test.jpg.txt", content, 0666)
+// Go sync.Once
+/*
+考虑一个简单的场景，函数 ReadConfig 需要读取环境变量，并转换为对应的配置。环境变量在程序执行前已经确定，执行过程中不会发生改变。
+ReadConfig 可能会被多个协程并发调用，为了提升性能（减少执行时间和内存占用），使用 sync.Once 是一个比较好的方式。
 
-	encodedContent := base64.StdEncoding.EncodeToString(content)
-	f, _ := os.Create("test.jpg.txt") //创建文件
-	//	f, err1 := os.OpenFile("test.jpg.txt", os.O_APPEND, 0666) //打开文件
-	//fmt.Println(f, err1)
-	n, err := io.WriteString(f, encodedContent) //写入文件(字符串)
-	fmt.Println(n, err)
+在这个例子中，声明了 2 个全局变量，once 和 config；
+config 是需要在 ReadConfig 函数中初始化的(将环境变量转换为 Config 结构体)，ReadConfig 可能会被并发调用。
+如果 ReadConfig 每次都构造出一个新的 Config 结构体，既浪费内存，又浪费初始化时间。如果 ReadConfig 中不加锁，
+初始化全局变量 config 就可能出现并发冲突。这种情况下，使用 sync.Once 既能够保证全局变量初始化时是线程安全的，又能节省内存和初始化时间。
+*/
+type Config struct {
+	Server string
+	Port   int64
+}
+
+var (
+	once   sync.Once
+	config *Config
+)
+
+func ReadConfig() *Config {
+	once.Do(func() {
+		var err error
+		config = &Config{Server: os.Getenv("TT_SERVER_URL")}
+		config.Port, err = strconv.ParseInt(os.Getenv("TT_PORT"), 10, 0)
+		if err != nil {
+			config.Port = 8080 // default port
+		}
+		log.Println("init config")
+	})
+	return config
+}
+func TestOne6(t *testing.T) {
+	for i := 0; i < 10; i++ {
+		go func() {
+			_ = ReadConfig()
+		}()
+	}
+	time.Sleep(time.Second)
+}
+
+func TestOne7(t *testing.T) {
+
+}
+
+func TestOne8(t *testing.T) {
 
 }
