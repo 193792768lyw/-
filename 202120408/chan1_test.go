@@ -4,8 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Jeffail/tunny"
+	"golang.org/x/xerrors"
 	"log"
 	"math"
+	"net/http"
+	"net/rpc"
 	"os"
 	"strconv"
 	"sync"
@@ -186,5 +189,120 @@ func TestOne7(t *testing.T) {
 }
 
 func TestOne8(t *testing.T) {
+	err := xerrors.New("sdfv")
+	err = nil
+	_, ok := err.(error)
+	fmt.Println(ok)
+}
 
+type Result struct {
+	Num, Ans int
+}
+
+type Calc int
+
+// Square calculates the square of num
+func (calc *Calc) Square(num int, result *Result) error {
+	result.Num = num
+	result.Ans = num * num
+	return nil
+}
+func TestOne9(t *testing.T) {
+	rpc.Register(new(Calc))
+	rpc.HandleHTTP()
+
+	log.Printf("Serving RPC server on port %d", 1234)
+	if err := http.ListenAndServe(":1234", nil); err != nil {
+		log.Fatal("Error serving: ", err)
+	}
+}
+
+type Demo struct {
+	name string
+}
+
+func TestOne10(t *testing.T) {
+	var a1 *Demo = &Demo{name: "hjvakf"}
+	inter(a1)
+	fmt.Println(a1)
+}
+func inter(a interface{}) {
+	fmt.Println(a)
+	a1 := a.(*Demo)
+	a1.name = "000"
+	fmt.Println(a1)
+}
+
+func Increase() func() int {
+	n := 0
+	return func() int {
+		n++
+		return n
+	}
+}
+
+func TestOne19(t *testing.T) {
+
+	fmt.Println(CurWeekStart(time.Now().AddDate(0, 0, -30)).Format("2006-01-02"))
+	fmt.Println(CurWeekEnd(time.Now().AddDate(0, 0, -1)).Format("2006-01-02"))
+	fmt.Println(CurMonthStart(time.Now().AddDate(0, 0, -30)).Format("2006-01-02"))
+	fmt.Println(CurMonthEnd(time.Now().AddDate(0, 0, -1)).Format("2006-01-02"))
+}
+
+// CurMonthEnd 当月末
+func CurMonthEnd(t time.Time) time.Time {
+	return CurMonthStart(t).AddDate(0, 1, -1)
+}
+
+// LastMonthStart 上月初
+func LastMonthStart(t time.Time) time.Time {
+	return CurMonthStart(t).AddDate(0, -1, 0)
+}
+
+// LastMonthEnd 上月末
+func LastMonthEnd(t time.Time) time.Time {
+	return CurMonthStart(t).AddDate(0, 0, -1)
+}
+
+// CurMonthStart 当月初
+func CurMonthStart(t time.Time) time.Time {
+	curYear, curMonth, _ := t.Date()
+	curLocation := t.Location()
+	return time.Date(curYear, curMonth, 1, 0, 0, 0, 0, curLocation)
+}
+
+// CurWeekEnd 这周末
+func CurWeekEnd(t time.Time) time.Time {
+	weekday := t.Weekday()
+	if weekday == time.Sunday {
+		weekday = 7
+	}
+	return t.AddDate(0, 0, int(7-weekday))
+}
+
+// CurWeekStart 这周初
+func CurWeekStart(t time.Time) time.Time {
+	weekday := t.Weekday()
+	if weekday == time.Sunday {
+		weekday = 7
+	}
+	return t.AddDate(0, 0, int(-weekday+1))
+}
+
+// LastWeekStart 上周初
+func LastWeekStart(t time.Time) time.Time {
+	weekday := t.Weekday()
+	if weekday == time.Sunday {
+		weekday = 7
+	}
+	return t.AddDate(0, 0, int(-weekday-6))
+}
+
+// LastWeekEnd 上周末
+func LastWeekEnd(t time.Time) time.Time {
+	weekday := t.Weekday()
+	if weekday == time.Sunday {
+		weekday = 7
+	}
+	return t.AddDate(0, 0, int(-weekday))
 }
