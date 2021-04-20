@@ -24,4 +24,6 @@ https://ueokande.github.io/go-slice-tricks/
 Go 语言设计与实现
 https://draveness.me/golang/docs/part2-foundation/ch04-basic/golang-reflect/
 
+从头到尾彻底理解KMP（2014年8月22日版）
+https://blog.csdn.net/v_july_v/article/details/7041827
 */
