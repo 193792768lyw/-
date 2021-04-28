@@ -1,36 +1,24 @@
 package main
 
-import (
-	"fmt"
-	_ "math/rand" // okay: 匿名引入
-)
-
-type S0 struct {
-	y int "foo"
-	x bool
-}
-
-type S1 = struct { // S1是一个非定义类型
-	x int "foo"
-	y bool
-}
-
-type S2 = struct { // S2也是一个非定义类型
-	x int "bar"
-	y bool
-}
-
-type S3 S2 // S3是一个定义类型。
-type S4 S3 // S4是一个定义类型。
-// 如果不考虑字段标签，S3（S4）和S1的底层类型一样。
-// 如果考虑字段标签，S3（S4）和S1的底层类型不一样。
-
-var v0, v1, v2, v3, v4 = S0{}, S1{}, S2{}, S3{}, S4{}
+import "fmt"
 
 func main() {
-	arr := []int{1, 1, 1, 1, 1, 1, 1}
-	arr1 := arr[0:2:3]
-	arr1 = append(arr1, 9, 9)
-	fmt.Println(arr1, len(arr1), cap(arr1))
-	fmt.Println(arr)
+	a := [...]int{0, 1, 2, 3, 4, 5, 6}
+	s0 := a[:]     // <=> s0 := a[0:7:7]
+	s1 := s0[:]    // <=> s1 := s0
+	s2 := s1[1:3]  // <=> s2 := a[1:3]
+	s3 := s1[3:]   // <=> s3 := s1[3:7]
+	s4 := s0[3:5]  // <=> s4 := s0[3:5:7]
+	s5 := s4[:2:2] // <=> s5 := s0[3:5:5]
+	s6 := append(s4, 77)
+	s7 := append(s5, 88)
+	s8 := append(s7, 66)
+	s3[1] = 99
+	fmt.Println(len(s2), cap(s2), s2) // 2 6 [1 2]
+	fmt.Println(len(s3), cap(s3), s3) // 4 4 [3 99 77 6]
+	fmt.Println(len(s4), cap(s4), s4) // 2 4 [3 99]
+	fmt.Println(len(s5), cap(s5), s5) // 2 2 [3 99]
+	fmt.Println(len(s6), cap(s6), s6) // 3 4 [3 99 77]
+	fmt.Println(len(s7), cap(s7), s7) // 3 4 [3 4 88]
+	fmt.Println(len(s8), cap(s8), s8) // 4 4 [3 4 88 66]
 }
