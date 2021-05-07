@@ -4,14 +4,20 @@ import "fmt"
 
 func main() {
 
-	s := [...]struct{ age int }{
-		{44}, {55}, {66},
+	var dd interface{} = ""
+	if dd == "" {
+		fmt.Println("Dvfsb")
+
 	}
 
-	for _, v := range s {
-		fmt.Println(v)
-		s[1].age = 8888
-	}
-	fmt.Println(s)
+	//s := [...]struct{ age int }{
+	//	{44}, {55}, {66},
+	//}
+	//
+	//for _, v := range s {
+	//	fmt.Println(v)
+	//	s[1].age = 8888
+	//}
+	//fmt.Println(s)
 
 }

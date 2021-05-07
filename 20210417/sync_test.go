@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"runtime"
 	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 )
@@ -297,14 +298,161 @@ func TestA31(t *testing.T) {
 	fmt.Println("c")
 }
 
+// 整数原子操作
 func TestA41(t *testing.T) {
+	var n int32
+	var wg sync.WaitGroup
+	for i := 0; i < 1000; i++ {
+		wg.Add(1)
+		go func() {
+			fmt.Println(atomic.AddInt32(&n, 1))
+			wg.Done()
+		}()
+	}
+	wg.Wait()
 
+	fmt.Println(atomic.LoadInt32(&n)) // 1000
+
+}
+
+type Page struct {
+	views uint32
+}
+
+func (page *Page) SetViews(n uint32) {
+	atomic.StoreUint32(&page.views, n)
+
+}
+
+func (page *Page) Views() uint32 {
+	return atomic.LoadUint32(&page.views)
 }
 
 func TestA51(t *testing.T) {
+	var (
+		n uint64 = 97
+		m uint64 = 1
+		k int    = 2
+	)
+	const (
+		a        = 3
+		b uint64 = 4
+		c uint32 = 5
+		d int    = 6
+	)
+
+	show := fmt.Println
+	atomic.AddUint64(&n, -m)
+	show(n) // 96 (97 - 1)
+
+	atomic.AddUint64(&n, -uint64(k))
+	show(n) // 94 (96 - 2)
+
+	atomic.AddUint64(&n, ^uint64(a-1))
+	show(n) // 91 (94 - 3)
+
+	atomic.AddUint64(&n, ^(b - 1))
+	show(n) // 87 (91 - 4)
+
+	atomic.AddUint64(&n, ^uint64(c-1))
+	show(n) // 82 (87 - 5)
+	atomic.AddUint64(&n, ^uint64(d-1))
+	show(n) // 76 (82 - 6)
+
+	x := b
+	atomic.AddUint64(&n, -x)
+	show(n) // 72 (76 - 4)
+	atomic.AddUint64(&n, ^(m - 1))
+	show(n) // 71 (72 - 1)
+	atomic.AddUint64(&n, ^uint64(k-1))
+	show(n) // 69 (71 - 2)
+}
+
+/*
+SwapT函数调用和StoreT函数调用类似，但是返回修改之前的旧值（因此称为置换操作）。
+
+一个CompareAndSwapT函数调用仅在新值和旧值 相等 的情况下才会执行修改操作，并返回true；否则立即返回false。
+*/
+func TestA61(t *testing.T) {
+	var n int64 = 123
+	var old = atomic.SwapInt64(&n, 789)
+	fmt.Println(n, old) // 789 123
+
+	swapped := atomic.CompareAndSwapInt64(&n, 123, 456)
+	fmt.Println(swapped) // false
+	fmt.Println(n)       // 789
+	swapped = atomic.CompareAndSwapInt64(&n, 789, 456)
+	fmt.Println(swapped) // true
+	fmt.Println(n)       // 456
+}
+
+func TestA71(t *testing.T) {
+	p0 := new(int)   // p0指向一个int类型的零值
+	fmt.Println(p0)  // （打印出一个十六进制形式的地址）
+	fmt.Println(*p0) // 0
+
+	x := *p0         // x是p0所引用的值的一个复制。
+	p1, p2 := &x, &x // p1和p2中都存储着x的地址。
+	// x、*p1和*p2表示着同一个int值。
+	fmt.Println(p1 == p2) // true
+	fmt.Println(p0 == p1) // false
+	p3 := &*p0            // <=> p3 := &(*p0)
+	// <=> p3 := p0
+	// p3和p0中存储的地址是一样的。
+	fmt.Println(p0 == p3) // true
+	*p0, *p1 = 123, 789
+	fmt.Println(*p2, x, *p3) // 789 789 123
+
+	fmt.Printf("%T, %T \n", *p0, x) // int, int
+	fmt.Printf("%T, %T \n", p0, p1) // *int, *int
+}
+
+func double(x *int) {
+	*x += *x
+	x = nil // 此行仅为讲解目的
+}
+
+func TestA72(t *testing.T) {
+	var a = 3
+	double(&a)
+	fmt.Println(a) // 6
+	p := &a
+	double(p)
+	fmt.Println(a, p == nil) // 12 false
+}
+func TestA73(t *testing.T) {
+	a := int64(5)
+	p := &a
+
+	// 下面这两行编译不通过。
+	/*
+		p++
+		p = (&a) + 8
+	*/
+
+	*p++
+	fmt.Println(*p, a)   // 6 6
+	fmt.Println(p == &a) // true
+
+	*&a++
+	*&*&a++
+	**&p++
+	*&*p++
+	fmt.Println(*p, a) // 10 10
+}
+func TestA74(t *testing.T) {
 
 }
 
-func TestA61(t *testing.T) {
+func TestA75(t *testing.T) {
+
+}
+func TestA76(t *testing.T) {
+
+}
+func TestA77(t *testing.T) {
+
+}
+func TestA78(t *testing.T) {
 
 }
