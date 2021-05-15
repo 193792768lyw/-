@@ -26,4 +26,17 @@ https://draveness.me/golang/docs/part2-foundation/ch04-basic/golang-reflect/
 
 从头到尾彻底理解KMP（2014年8月22日版）
 https://blog.csdn.net/v_july_v/article/details/7041827
+
+Redis集群方案对比：Codis、Twemproxy、Redis Cluster
+https://cloud.tencent.com/developer/article/1701574
+
+从演进式角度看消息队列
+https://mp.weixin.qq.com/s/2NoRkIKG0IFcoI-nZienAQ
+
+什么是云原生
+https://juejin.cn/post/6844904197859590151#heading-0
+
+DDD 模式从天书到实践
+https://zhuanlan.zhihu.com/p/91525839
+
 */
