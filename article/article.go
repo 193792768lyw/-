@@ -39,4 +39,18 @@ https://juejin.cn/post/6844904197859590151#heading-0
 DDD 模式从天书到实践
 https://zhuanlan.zhihu.com/p/91525839
 
+ Raft 算法
+https://github.com/maemual/raft-zh_cn
+
+动画演示
+http://thesecretlivesofdata.com/raft/
+场景测试：
+https://raft.github.io/
+
+一文搞懂Raft算法
+https://www.cnblogs.com/xybaby/p/10124083.html#_label_4
+
+
+Redis的字典渐进式扩容与ConcurrentHashMap的扩容策略比较
+https://blog.csdn.net/wangmaohong0717/article/details/84611426
 */
