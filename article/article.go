@@ -53,4 +53,7 @@ https://www.cnblogs.com/xybaby/p/10124083.html#_label_4
 
 Redis的字典渐进式扩容与ConcurrentHashMap的扩容策略比较
 https://blog.csdn.net/wangmaohong0717/article/details/84611426
+
+https://blog.csdn.net/ko0491/article/details/101265953
+redis - set key value [expiration EX seconds|PX milliseconds] [NX|XX]  分布式锁
 */
