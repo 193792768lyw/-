@@ -8,7 +8,7 @@ func main() {
 func hammingDistance(x int, y int) int {
 	res := 0
 	for i := 0; i < 31; i++ {
-		res += (x >> i & 0x0001) ^ (y >> i & 0x0001)
+		res += (x >> i & 1) ^ (y >> i & 1)
 	}
 	return res
 }
