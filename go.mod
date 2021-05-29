@@ -15,6 +15,6 @@ require (
 	github.com/robfig/cron/v3 v3.0.0
 	github.com/tidwall/gjson v1.7.1
 	golang.org/x/sys v0.0.0-20210119212857-b64e53b001e4 // indirect
-	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
+	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 )
