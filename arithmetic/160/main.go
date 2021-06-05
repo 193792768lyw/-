@@ -1,7 +1,12 @@
 package main
 
-func main() {
+import (
+	"fmt"
+	"strconv"
+)
 
+func main() {
+	fmt.Println(strconv.ParseFloat("7777", 10))
 }
 
 type ListNode struct {
