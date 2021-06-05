@@ -23,3 +23,14 @@ func removeElements(head *ListNode, val int) *ListNode {
 
 	return newHead.Next
 }
+
+func removeElements1(head *ListNode, val int) *ListNode {
+	if head == nil {
+		return head
+	}
+	head.Next = removeElements(head.Next, val)
+	if head.Val == val {
+		return head.Next
+	}
+	return head
+}
