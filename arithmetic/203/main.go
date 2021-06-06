@@ -1,7 +1,14 @@
 package main
 
-func main() {
+import (
+	"fmt"
+	"time"
+)
 
+func main() {
+	fmt.Println(time.Now())
+	var f int64 = 1
+	fmt.Println(time.Now().Add(time.Duration(f) * time.Hour))
 }
 
 type ListNode struct {
