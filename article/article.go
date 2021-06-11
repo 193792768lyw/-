@@ -60,6 +60,9 @@ redis - set key value [expiration EX seconds|PX milliseconds] [NX|XX]  分布式
 Golang实现请求限流的几种办法
 https://blog.csdn.net/micl200110041/article/details/82013032
 
+RBAC模型：基于用户-角色-权限控制的一些思考
+http://www.woshipm.com/pd/1150093.html
+
 
 
 

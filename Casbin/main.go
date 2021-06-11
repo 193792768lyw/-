@@ -8,6 +8,44 @@ import (
 )
 
 func main() {
+	addone := func(x int) int { return x + 1 }
+	square := func(x int) int { return x * x }
+	double := func(x int) int { return x + x }
+
+	transforms := map[string][]func(int) int{
+		"inc,inc,inc": {addone, addone, addone},
+		"sqr,inc,dbl": {square, addone, double},
+		"dbl,sqr,sqr": {double, double, square},
+	}
+
+	for _, n := range []int{2, 3, 5, 7} {
+		fmt.Println(">>>", n)
+		for name, transfers := range transforms {
+			result := n
+			for _, xfer := range transfers {
+				result = xfer(result)
+			}
+			fmt.Printf(" %v: %v \n", name, result)
+		}
+	}
+
+	var a []map[struct {
+		a int
+		b struct {
+			x string
+			y bool
+		}
+	}]interface {
+		Build([]byte, struct {
+			x string
+			y bool
+		}) error
+		Update(dt float64)
+		Destroy()
+	}
+	fmt.Println(a)
+}
+func main2() {
 	e, err := casbin.NewEnforcer("D:\\goworkstation\\Study\\Casbin\\keymatch_model.conf", "D:\\goworkstation\\Study\\Casbin\\keymatch_policy.csv")
 
 	fmt.Printf("RBAC TENANTS test start\n") // output for debug
