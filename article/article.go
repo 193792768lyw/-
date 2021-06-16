@@ -64,6 +64,21 @@ RBAC模型：基于用户-角色-权限控制的一些思考
 http://www.woshipm.com/pd/1150093.html
 
 
+Casbin是一个强大的、高效的开源访问控制框架，其权限管理机制支持多种访问控制模型。
+https://casbin.org/docs/zh-CN/middlewares
+https://www.kancloud.cn/oldlei/casbin/1289450
 
+Golang Version Manager go版本管理
+https://github.com/voidint/g
+
+
+终于有人把Elasticsearch原理讲透了！
+https://zhuanlan.zhihu.com/p/62892586
+
+什么是Service Mesh
+https://zhuanlan.zhihu.com/p/61901608
+
+正确入门Service Mesh：起源、发展和现状
+https://zhuanlan.zhihu.com/p/164730174
 
 */
