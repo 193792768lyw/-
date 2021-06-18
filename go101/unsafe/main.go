@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"reflect"
-	"strings"
 	"unsafe"
 )
 
@@ -186,15 +185,19 @@ func String2ByteSlice1(str string) (bs []byte) {
 }
 
 func main() {
+	n := 1
+	defer func(n int) { fmt.Println(n) }(n)
+	n = 2
+	defer func(n int) { fmt.Println(n) }(n)
 	// str := "Golang"
 	// 对于官方标准编译器来说，上面这行将使str中的字节
 	// 开辟在不可修改内存区。所以这里我们使用下面这行。
-	str := strings.Join([]string{"Go", "land"}, "")
-	s := String2ByteSlice1(str)
-	fmt.Printf("%s\n", s) // Goland
-	s[5] = 'g'
-	fmt.Println(str) // Golang
-	var ddd uintptr = 99
-	ddd += 1
-	fmt.Println(ddd)
+	//str := strings.Join([]string{"Go", "land"}, "")
+	//s := String2ByteSlice1(str)
+	//fmt.Printf("%s\n", s) // Goland
+	//s[5] = 'g'
+	//fmt.Println(str) // Golang
+	//var ddd uintptr = 99
+	//ddd += 1
+	//fmt.Println(ddd)
 }

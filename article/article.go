@@ -78,7 +78,10 @@ https://zhuanlan.zhihu.com/p/62892586
 什么是Service Mesh
 https://zhuanlan.zhihu.com/p/61901608
 
-正确入门Service Mesh：起源、发展和现状
+正确入门Service Mesh：起源、发展和现状  阿里技术
 https://zhuanlan.zhihu.com/p/164730174
+
+HTTP请求幂等性
+https://blog.csdn.net/kepengs/article/details/82706721
 
 */
