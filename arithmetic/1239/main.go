@@ -9,6 +9,15 @@ func main() {
 	fmt.Println(maxLength([]string{"bbb"}))
 }
 
+/*
+go map 实现
+go mysql 对于时间字段的索引 在查询条件超过一定范围时会失效
+go gc会有停顿现象 gc实现
+
+mysql 所有的索引都是存储的主键索引来实现
+
+*/
+
 func maxLength(arr []string) (ans int) {
 	masks := []int{}
 outer:
