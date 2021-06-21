@@ -30,7 +30,7 @@ func main() {
 		go worker(ctx, &wg)
 	}
 
-	time.Sleep(27 * time.Second)
+	time.Sleep(4 * time.Second)
 	cancel()
 
 	wg.Wait()
