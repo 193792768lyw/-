@@ -106,6 +106,15 @@ https://blog.csdn.net/qq_34051366/article/details/106881302?utm_medium=distribut
 
 集合取并集用归并排序
 
+一个数组的元素为1~n，在o(n)的时间内对数组排序
 https://blog.csdn.net/pengchengliu/article/details/90696007
+
+
+go map 实现
+go mysql 对于时间字段的索引 在查询条件超过一定范围时会失效
+go gc会有停顿现象 gc实现
+
+mysql 所有的索引都是存储的主键索引来实现
+
 
 */
