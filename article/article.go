@@ -87,4 +87,25 @@ https://blog.csdn.net/kepengs/article/details/82706721
 火了 2 年的服务网格究竟给微服务带来了什么？
 https://zhuanlan.zhihu.com/p/159434170
 
+MySQL索引解析（联合索引/最左前缀/覆盖索引/索引下推）
+https://www.cnblogs.com/kkbill/p/11354685.html#1-%E7%B4%A2%E5%BC%95%E5%9F%BA%E7%A1%80
+
+
+【Java面试+Java后端技术学习指南】：一份通向理想互联网公司的面试指南，
+包括 Java，技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、
+系统设计、分布式、数据库（MySQL、Redis）、Java 项目实战等
+
+
+https://github.com/OUYANGSIHAI/JavaInterview
+//面试官问你B树和B+树，就把这篇文章丢给他
+https://segmentfault.com/a/1190000020416577
+
+
+有关于mysql 时间作为条件查询，索引失效的问题。
+https://blog.csdn.net/qq_34051366/article/details/106881302?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&spm=1001.2101.3001.4242
+
+集合取并集用归并排序
+
+https://blog.csdn.net/pengchengliu/article/details/90696007
+
 */
