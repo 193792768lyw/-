@@ -1,9 +1,13 @@
 package main
 
-import "strings"
+import (
+	"fmt"
+	"math"
+	"strings"
+)
 
 func main() {
-
+	fmt.Println(findRepeatNumber([]int{3, 1, 2, 3}))
 }
 
 var neighbors = [6][]int{{1, 3}, {0, 2, 4}, {1, 5}, {0, 4}, {1, 3, 5}, {2, 4}}
@@ -54,4 +58,15 @@ func slidingPuzzle(board [][]int) int {
 		}
 	}
 	return -1
+}
+
+func findRepeatNumber(nums []int) int {
+	for _, v := range nums {
+		v = int(math.Abs(float64(v)))
+		if nums[v] < 0 {
+			return v
+		}
+		nums[v] *= -1
+	}
+	return 0
 }
