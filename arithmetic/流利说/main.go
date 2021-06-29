@@ -18,7 +18,7 @@ func IsBST(arr []int) bool {
 		}
 		index := 0
 		for i, v := range arr {
-			if root < v {
+			if root > v {
 				left = append(left, v)
 				index = i
 			} else {
@@ -26,7 +26,7 @@ func IsBST(arr []int) bool {
 			}
 		}
 
-		for i := index; i < len(arr); i++ {
+		for i := index + 1; i < len(arr); i++ {
 			if root < arr[i] {
 				right = append(right, arr[i])
 			} else {
@@ -41,9 +41,8 @@ func IsBST(arr []int) bool {
 }
 
 func main() {
-	arr := []int{3, 2, 1, 4}
+	arr := []int{5, 2, 1, 3, 6}
 	fmt.Println(IsBST(arr))
-	arr = []int{4, 2, 1, 5, 3}
 }
 
 //
